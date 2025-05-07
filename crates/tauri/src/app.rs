@@ -38,6 +38,9 @@ use tauri_runtime::{
 };
 use tauri_utils::{assets::AssetsIter, PackageInfo};
 
+#[cfg(feature = "wry")]
+pub use tauri_runtime_wry::{DeviceEvent, DeviceId};
+
 use std::{
   borrow::Cow,
   collections::HashMap,
@@ -725,6 +728,20 @@ impl App<crate::Wry> {
     <P as tauri_runtime_wry::PluginBuilder<EventLoopMessage>>::Plugin: Send,
   {
     self.handle.runtime_handle.plugin(plugin);
+  }
+
+  /// Adds a callback to be called when a device event is received.
+  ///
+  /// This is only available on the Wry runtime.
+  pub fn set_device_event_callback<F>(&self, callback: F)
+  where
+    F: Fn(DeviceId, DeviceEvent) + Send + 'static,
+  {
+    if let Some(runtime) = self.runtime.as_ref() {
+      runtime.set_device_event_callback(callback);
+    } else {
+      log::warn!("device event callback is not supported on this platform");
+    }
   }
 }
 
