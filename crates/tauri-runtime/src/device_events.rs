@@ -67,7 +67,7 @@ pub enum DeviceEvent {
   },
 
   Key {
-    pysical_key: Code,
+    physical_key: Code,
     state: KeyState,
   },
 

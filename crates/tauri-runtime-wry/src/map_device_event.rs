@@ -29,7 +29,7 @@ pub fn map_device_event(event: tao::event::DeviceEvent) -> Option<DeviceEvent> {
       let physical_key = raw_key_event.physical_key;
       let state = map_element_state(raw_key_event.state)?;
       Some(DeviceEvent::Key {
-        pysical_key: map_physical_key(physical_key)?,
+        physical_key: map_physical_key(physical_key)?,
         state,
       })
     }
