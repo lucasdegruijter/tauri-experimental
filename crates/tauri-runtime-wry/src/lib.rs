@@ -2821,6 +2821,7 @@ impl<T: UserEvent> Wry<T> {
         active_tracing_spans: Default::default(),
       },
       plugins: Default::default(),
+      device_event_callback: Arc::new(Mutex::new(None)),
       next_window_id: Default::default(),
       next_webview_id: Default::default(),
       next_window_event_id: Default::default(),
