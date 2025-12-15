@@ -13,6 +13,7 @@
 )]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+use device_events::DeviceEventFilter;
 use raw_window_handle::DisplayHandle;
 use serde::Deserialize;
 use std::{borrow::Cow, fmt::Debug, sync::mpsc::Sender};
