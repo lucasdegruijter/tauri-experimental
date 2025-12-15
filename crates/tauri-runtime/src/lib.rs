@@ -13,6 +13,7 @@
 )]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+use device_events::DeviceEventFilter;
 use raw_window_handle::DisplayHandle;
 use serde::Deserialize;
 use std::{borrow::Cow, fmt::Debug, sync::mpsc::Sender};
@@ -89,18 +90,6 @@ pub enum UserAttentionType {
   /// - **macOS:** Bounces the dock icon once.
   /// - **Windows:** Flashes the taskbar button until the application is in focus.
   Informational,
-}
-
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
-#[serde(tag = "type")]
-pub enum DeviceEventFilter {
-  /// Always filter out device events.
-  Always,
-  /// Filter out device events while the window is not focused.
-  #[default]
-  Unfocused,
-  /// Report all device events regardless of window focus.
-  Never,
 }
 
 /// Defines the orientation that a window resize will be performed.
