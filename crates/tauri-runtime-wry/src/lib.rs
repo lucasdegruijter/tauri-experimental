@@ -144,9 +144,9 @@ use std::{
 pub type WebviewId = u32;
 type IpcHandler = dyn Fn(Request<String>) + 'static;
 
-mod map_device_event;
 #[cfg(not(debug_assertions))]
 mod dialog;
+mod map_device_event;
 mod monitor;
 #[cfg(any(
   windows,
@@ -3180,9 +3180,9 @@ fn make_event_handler<T: UserEvent, F: FnMut(RunEvent<T>) + 'static>(
   let proxy = context.proxy;
 
   move |event, event_loop, control_flow| {
-      // if device event skip the plugins to optimize performance
-      // if device filter is set to always and this is not here there will be a performance hit
-      if !matches!(event, Event::DeviceEvent { .. }) {
+    // if device event skip the plugins to optimize performance
+    // if device filter is set to always and this is not here there will be a performance hit
+    if !matches!(event, Event::DeviceEvent { .. }) {
       for p in plugins.lock().unwrap().iter_mut() {
         let prevent_default = p.on_event(
           &event,
@@ -3202,7 +3202,7 @@ fn make_event_handler<T: UserEvent, F: FnMut(RunEvent<T>) + 'static>(
           return;
         }
       }
-      }
+    }
     handle_event_loop(
       event,
       event_loop,
